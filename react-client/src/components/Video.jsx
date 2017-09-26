@@ -1,15 +1,52 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-const Video = (props) => (
-  <div>
-    <span>
-      { props.video.description }
-    </span>
-    <span>
-      { props.video.likes }
-    </span>
+class Video extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      description: '',
+      video: this.props.video,
+    }
+  }
+  descriptionUp(e) {
+    e.preventDefault();
+    this.setState({description: e.target.value});
 
-  </div>
-)
+    var videoToSave = this.state.video;
+    videoToSave.description = this.state.description;
+    this.state.video = videoToSave;
+  }
+  addDescription(e) {
+  	e.preventDefault();
+    this.props.primeVideo(this.state.video);
+  }
+
+  render() {
+  return (
+    <div>
+      <li>
+        <span onClick={() => this.props.primeVideo(this.state.video)} >
+          {this.props.video.title}
+        </span>
+        <form>
+          <input type="text" onKeyUp={(e) => this.descriptionUp(e)} placeholder="remember a description"/>
+          <button type="submit" onClick={(e) => this.addDescription(e)} 
+          />
+        </form>
+        <ul>
+          <li placeholder="hello">
+            { this.props.video.description }
+          </li>
+        </ul>
+      </li>
+      <span>
+        { this.props.video.likes }
+      </span>
+  
+    </div>
+    )
+  }
+}
 
 export default Video;
