@@ -25,6 +25,12 @@ class Video extends React.Component {
   render() {
   return (
     <div>
+
+      <div> 
+        <button onClick={(e) => this.props.updatePlaylist(this.state.video)} >
+        UPDATE Playlist
+        </button>
+      </div>
       <li>
         <span onClick={() => this.props.primeVideo(this.state.video)} >
           {this.props.video.title}
