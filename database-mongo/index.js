@@ -11,19 +11,20 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
+var videoSchema = mongoose.Schema({
   quantity: Number,
-  description: String
+  description: String,
+  clicks: Number
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var videos = mongoose.model('video', videoSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  videos.find({}, function(err, videos) {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, videos);
     }
   });
 };

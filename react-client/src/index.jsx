@@ -1,22 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import Videos from './components/Videos.jsx';
+import Search from './components/Search.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      videos: []
+
     }
   }
 
   componentDidMount() {
+    //grab stored user(s) videos;
     $.ajax({
-      url: '/items', 
-      success: (data) => {
+      url: '/videos', 
+      success: (videos) => {
         this.setState({
-          items: data
+          videos: videos
         })
       },
       error: (err) => {
@@ -25,11 +28,33 @@ class App extends React.Component {
     });
   }
 
+  search(e, query) {
+    e.preventDefault();
+    console.log(query);
+    $.ajax({
+      url: '/search',
+      type: 'POST',
+      data: {query: JSON.stringify(query)},
+      success: (videos) => {
+        this.setState({
+          videos: videos
+        })
+      } ,
+      error: (err) => {
+        console.log('err', err);
+      }
+
+    })
+  }
+
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
+    return (
+      <div>
+        <h1>Vid finder</h1>
+        <Search search={this.search.bind(this)}/>
+        <Videos videos={this.state.videos}/>
+      </div>
+    )
   }
 }
 
