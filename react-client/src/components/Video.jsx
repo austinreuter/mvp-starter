@@ -27,7 +27,7 @@ class Video extends React.Component {
     <div>
 
       <div> 
-        <button onClick={(e) => this.props.updatePlaylist(this.state.video)} >
+        <button onClick={(e) => this.props.updatePlaylist(this.state.video, e)} >
         UPDATE Playlist
         </button>
       </div>
@@ -41,7 +41,7 @@ class Video extends React.Component {
           />
         </form>
         <ul>
-          <li placeholder="hello">
+          <li>
             { this.props.video.description }
           </li>
         </ul>

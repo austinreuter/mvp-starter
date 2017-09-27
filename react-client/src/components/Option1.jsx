@@ -22,7 +22,7 @@ class Option1 extends React.Component {
           })
         }>
           <button>
-          <button>click</button> for
+          click for
           your
           <br/>
           <button>

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import $ from 'jquery';
 
 class Search extends React.Component {
   constructor(props) {
@@ -24,10 +23,11 @@ class Search extends React.Component {
       <div> 
         <form>
           
-          <input type="text" onKeyUp={(e)=> this.nameUp(e)} placeholder="playlist name"/>
+          <input type="text" onKeyUp={(e)=> this.nameUp(e)} placeholder="new playlist name"/>
         </form>
+        <br/>
         <form>
-          <input type="text" onKeyUp={(e)=> this.queryUp(e)} placeholder="add-to/search playlist >"/>
+          <input type="text" onKeyUp={(e)=> this.queryUp(e)} placeholder="search youtube >"/>
           <button type="submit" onClick={(e) => this.props.search(e, this.state.query, this.state.name)} />
         </form>
 
